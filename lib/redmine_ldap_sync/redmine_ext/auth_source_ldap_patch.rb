@@ -272,8 +272,10 @@ module RedmineLdapSync
 
           def renamed_attrs(ldap_entry, attrs)
             multivalued_attrs = [ attribute_of(:user_groups), attribute_of(:parent_group) ]
-
             if attrs.length == 1
+              if attrs.first == nil 
+                return
+              end
               value = ldap_entry[attrs.first]
               multivalued_attrs.include?(attrs.first) ? value : value.first
             else
